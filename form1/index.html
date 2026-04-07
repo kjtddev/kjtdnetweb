@@ -3,189 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | KJTD</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            /* The Financial Times "Salmon" Pink */
-            --ft-pink: #fff1e5;
-            --text-dark: #1a1a1a;
-            --border-color: rgba(0, 0, 0, 0.15);
-            --success-green: #006633;
+            /* FT Salmon/Paper Color */
+            --bg-color: #fff1e5; 
+            /* Muted Taupe from your image */
+            --text-color: #b5b1a9; 
+            /* Darker focus color */
+            --text-focus: #33302e; 
+            --line-color: rgba(0, 0, 0, 0.1);
         }
 
         body {
-            background-color: var(--ft-pink);
-            color: var(--text-dark);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Instrument Serif', serif;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         .form-container {
             width: 100%;
-            max-width: 550px;
-            animation: fadeIn 0.8s ease-out;
+            max-width: 600px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .input-group {
+            position: relative;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--line-color);
         }
 
-        /* Large Serif Typography */
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            line-height: 1;
-            letter-spacing: -0.03em;
+        /* The Label (The big serif text in your image) */
+        .input-group label {
+            font-size: clamp(3rem, 10vw, 5rem);
+            display: block;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            pointer-events: none;
+            transition: color 0.3s ease;
         }
 
-        p.subtitle {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-style: italic;
-            margin-bottom: 3rem;
+        .optional {
+            font-size: 0.4em; /* Shrinks the (optional) text */
+            vertical-align: middle;
+            margin-left: 10px;
             opacity: 0.7;
         }
 
-        .form-group {
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
-
-        label {
-            display: block;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
+        /* The actual input field hidden behind/under the label */
         input {
             width: 100%;
-            padding: 10px 0;
-            background: transparent;
             border: none;
-            border-bottom: 2px solid var(--border-color);
-            font-size: 1.2rem;
-            font-family: inherit;
+            background: transparent;
+            font-family: 'Instrument Serif', serif;
+            font-size: 2rem;
+            padding: 10px 0;
+            color: var(--text-focus);
             outline: none;
-            transition: border-color 0.3s ease;
+            /* Keeps the label visible until user types */
         }
 
-        input:focus {
-            border-bottom-color: var(--text-dark);
+        input::placeholder {
+            color: transparent;
+        }
+
+        /* Styling for when the user is typing */
+        .input-group:focus-within {
+            border-bottom-color: var(--text-focus);
+        }
+        
+        .input-group:focus-within label {
+            color: var(--text-focus);
         }
 
         button {
-            background-color: var(--text-dark);
-            color: white;
-            padding: 18px 45px;
+            margin-top: 40px;
+            background: var(--text-focus);
+            color: var(--bg-color);
             border: none;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
+            padding: 15px 40px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             cursor: pointer;
-            transition: transform 0.1s active, opacity 0.2s ease;
+            transition: opacity 0.2s;
         }
 
         button:hover {
             opacity: 0.9;
         }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
-        /* Status Messages */
-        #status {
-            margin-top: 1.5rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
         #status.success {
-            color: var(--success-green);
-            font-family: 'Playfair Display', serif;
+            margin-top: 20px;
             font-style: italic;
             font-size: 1.2rem;
-        }
-
-        #status.error {
-            color: #cc0000;
+            color: var(--text-focus);
         }
     </style>
 </head>
 <body>
 
     <div class="form-container">
-        <h1>Get in touch.</h1>
-        <p class="subtitle">Direct inquiries for admin@kjtd.net</p>
-
         <form id="my-form" action="https://formspree.io/f/xgopdkrq" method="POST">
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required placeholder="Ex. Alexander Hamilton">
+            
+            <div class="input-group">
+                <label for="first">First</label>
+                <input type="text" id="first" name="first_name" required>
             </div>
 
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required placeholder="email@domain.com">
+            <div class="input-group">
+                <label for="middle">Middle <span class="optional">(optional)</span></label>
+                <input type="text" id="middle" name="middle_name">
             </div>
 
-            <div class="form-group">
-                <label for="message">Message</label>
-                <input type="text" id="message" name="message" required placeholder="How can we help?">
+            <div class="input-group">
+                <label for="last">Last</label>
+                <input type="text" id="last" name="last_name" required>
             </div>
 
-            <button id="my-form-button">Submit Request</button>
+            <div class="input-group" style="margin-top: 40px;">
+                <label for="email" style="font-size: 2.5rem;">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <button id="my-form-button">Submit</button>
             <p id="status"></p>
         </form>
     </div>
 
     <script>
         var form = document.getElementById("my-form");
-        
         async function handleSubmit(event) {
           event.preventDefault();
           var status = document.getElementById("status");
           var data = new FormData(event.target);
-          
           fetch(event.target.action, {
             method: form.method,
             body: data,
-            headers: {
-                'Accept': 'application/json'
-            }
+            headers: { 'Accept': 'application/json' }
           }).then(response => {
             if (response.ok) {
-              status.innerHTML = "Thank you! Your message has been sent.";
-              status.classList.add("success");
+              status.innerHTML = "Success. We have received your details.";
+              status.className = "success";
               form.reset();
-              // Hide button after success
               document.getElementById("my-form-button").style.display = "none";
             } else {
-              response.json().then(data => {
-                if (Object.hasOwn(data, 'errors')) {
-                  status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                } else {
-                  status.innerHTML = "Oops! There was a problem submitting your form";
-                }
-                status.classList.add("error");
-              })
+              status.innerHTML = "Error submitting form.";
             }
           }).catch(error => {
-            status.innerHTML = "Oops! There was a problem submitting your form";
-            status.classList.add("error");
+            status.innerHTML = "Connection error.";
           });
         }
         form.addEventListener("submit", handleSubmit)

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>KJTD.NET | Global ISP</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -18,45 +18,52 @@
             height: 100%;
             width: 100%;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Fixes scrolling */
             background-color: #000;
+            /* Ensures no scroll on desktop, but allows content to fit on mobile */
+            overflow: hidden; 
         }
 
-        /* Full Screen Data Center Background */
+        /* Responsive Full Screen Background */
         .hero-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), 
-                        url('https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2000&auto=format&fit=crop');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.pexels.com/photos/2881232/pexels-photo-2881232.jpeg?auto=compress&cs=tinysrgb&w=1920');
             background-size: cover;
             background-position: center;
             height: 100vh;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centers main content */
+            justify-content: space-between; /* Pushes content to middle and bottom */
             align-items: center;
             text-align: center;
             position: relative;
         }
 
+        /* Spacer to balance the top since contact is at bottom */
+        .top-spacer { height: 60px; }
+
         .main-content {
             z-index: 1;
             padding: 20px;
+            width: 100%;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
             font-weight: 800;
             letter-spacing: 4px;
-            color: #ADD8E6; /* Light Blue */
+            color: #ADD8E6;
             margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
         .subtitle {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            font-weight: 300;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            font-weight: 400;
             color: #ffffff;
             margin-bottom: 40px;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            letter-spacing: 2px;
+            opacity: 0.85;
         }
 
         /* Links Grid */
@@ -65,60 +72,70 @@
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .nav-link {
             text-decoration: none;
             color: #ADD8E6;
             border: 1px solid #ADD8E6;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .nav-link:hover {
-            color: #00FFFF; /* Cyan */
+            color: #00FFFF;
             border-color: #00FFFF;
             background: rgba(0, 255, 255, 0.1);
             transform: translateY(-2px);
         }
 
-        /* Bottom Contact Section (Sticky to bottom) */
+        /* Bottom Contact Section - Guaranteed Visibility */
         .footer-contact {
-            position: absolute;
-            bottom: 30px;
+            padding-bottom: clamp(20px, 5vh, 40px); /* Adjusts for screen height */
             width: 100%;
         }
 
         .contact-btn {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-decoration: none;
             color: #ADD8E6;
             font-weight: 600;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            padding: 10px;
         }
 
         .contact-btn:hover {
             color: #00FFFF;
         }
 
-        /* Mobile Adjustments */
+        /* Mobile Specific: If height is too short (landscape or small phones) */
+        @media (max-height: 500px) {
+            .hero-bg { overflow-y: auto; height: auto; min-height: 100vh; }
+            .top-spacer { display: none; }
+            .footer-contact { padding-top: 40px; }
+        }
+
         @media (max-width: 600px) {
-            .links-grid {
-                flex-direction: column;
-                width: 80%;
-            }
+            .links-grid { flex-direction: column; align-items: center; }
+            .nav-link { width: 220px; }
         }
     </style>
 </head>
 <body>
 
     <main class="hero-bg">
+        <div class="top-spacer"></div>
+
         <div class="main-content">
             <h1>KJTD.NET</h1>
             <p class="subtitle">A Global Internet Service Provider</p>
